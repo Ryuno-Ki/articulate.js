@@ -1,14 +1,6 @@
-'use strict';
+import VoiceObject from './voice-object';
 
-class VoiceObject {
-    constructor(options) {
-        const { name, language } = options;
-        this.name = name;
-        this.language = language;
-    }
-}
-
-class Articulate {
+export default class Articulate {
     constructor() {
         this.voices = [];
     }
@@ -41,10 +33,3 @@ class Articulate {
         });
     }
 }
-
-function init () {
-    const articulate = new Articulate();
-    articulate.init();
-}
-
-module.exports = init;

@@ -1,5 +1,14 @@
 import config from './src/config';
+import Articulate from './src/articulate';
 
-export default function () {
-    console.log('Config', config);
+function voiceTag (prepend, append) {
+    this.prepend = prepend;
+    this.append = append;
 }
+
+function init () {
+    const articulate = new Articulate();
+    articulate.init();
+}
+
+export default init;

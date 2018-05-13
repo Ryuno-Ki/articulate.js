@@ -9,7 +9,7 @@ bin/
 tmp/
 *.tmp
 *.bak
-*.swp
+*.sw[a-p]
 *~.nib
 local.properties
 .classpath
@@ -219,3 +219,6 @@ pip-log.txt
 #################
 
 node_modules
+coverage
+test/*
+!test/*.spec.js
