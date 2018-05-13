@@ -1,0 +1,26 @@
+{
+  "name": "articulate.js",
+  "version": "1.1.0",
+  "description": "Articulate.js, a jQuery plugin, enables developers, with as little as one line of code, to create links that allow users to click, sit back, and listen to the browser read aloud the important content on a Web page. In some ways, it can turn a thoughtful essay or article into a mini podcast. And because it uses built-in JavaScript functionality, no browser extensions or other system software is needed.",
+  "main": "articulate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acoti/articulate.js.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "jquery",
+    "voice",
+    "text-to-speech",
+    "codepen"
+  ],
+  "author": "Adam Coti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acoti/articulate.js/issues"
+  },
+  "homepage": "https://github.com/acoti/articulate.js#readme"
+}
