@@ -68,4 +68,157 @@ describe('Articulate', () => {
             expect(this.articulate.voices[ 0 ]).to.be.an('object');
         });
     });
+
+    describe('.pause()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('should pause speaking', function () {
+            // Arrange
+            const pauseSpy = sinon.spy();
+            global.window = { speechSynthesis: { pause: pauseSpy } };
+
+            // Act
+            const articulate = this.articulate.pause();
+
+            // Assert
+            expect(pauseSpy).to.have.been.called;
+            expect(articulate).to.equal(this.articulate);
+        });
+    });
+
+    describe('.resume()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('should resume speaking', function () {
+            // Arrange
+            const resumeSpy = sinon.spy();
+            global.window = { speechSynthesis: { resume: resumeSpy } };
+
+            // Act
+            const articulate = this.articulate.resume();
+
+            // Assert
+            expect(resumeSpy).to.have.been.called;
+            expect(articulate).to.equal(this.articulate);
+        });
+    });
+
+    describe('.stop()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('should stop speaking', function () {
+            // Arrange
+            const stopSpy = sinon.spy();
+            global.window = { speechSynthesis: { stop: stopSpy } };
+
+            // Act
+            const articulate = this.articulate.stop();
+
+            // Assert
+            expect(stopSpy).to.have.been.called;
+            expect(articulate).to.equal(this.articulate);
+        });
+    });
+
+    describe('.enabled()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        describe('when unsupported', function () {
+            it('should return false', function () {
+                // Arrange
+                global.window = {};
+
+                // Act
+                const enabled = this.articulate.enabled();
+
+                // Assert
+                expect(enabled).to.be.false;
+            });
+        });
+
+        describe('when supported', function () {
+            it('should return true', function () {
+                // Arrange
+                global.window = { speechSynthesis: {} };
+
+                // Act
+                const enabled = this.articulate.enabled();
+
+                // Assert
+                expect(enabled).to.be.true;
+            });
+        });
+    });
+
+    describe('.isSpeaking()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('checks whether it is running', function () {
+            // Arrange
+            global.window = { speechSynthesis: { speaking: true } };
+
+            // Act
+            const isSpeaking = this.articulate.isSpeaking();
+
+            // Assert
+            expect(isSpeaking).to.be.true;
+        });
+    });
+
+    describe('.isPaused()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('checks whether it is halted', function () {
+            // Arrange
+            global.window = { speechSynthesis: { paused: false } };
+
+            // Act
+            const isPaused = this.articulate.isPaused();
+
+            // Assert
+            expect(isPaused).to.be.false;
+        });
+    });
 });

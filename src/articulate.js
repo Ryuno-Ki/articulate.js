@@ -32,4 +32,33 @@ export default class Articulate {
             this.voices.push(voiceObject);
         });
     }
+
+    pause () {
+        window.speechSynthesis.pause();
+        return this;
+    }
+
+    resume () {
+        window.speechSynthesis.resume();
+        return this;
+    }
+
+    stop () {
+        window.speechSynthesis.stop();
+        return this;
+    }
+
+    enabled () {
+        return ('speechSynthesis' in window);
+    }
+
+    isSpeaking () {
+        // TODO: Turn into a getter
+        return window.speechSynthesis.speaking;
+    }
+
+    isPaused () {
+        // TODO: Turn into a getter
+        return window.speechSynthesis.paused;
+    }
 }
