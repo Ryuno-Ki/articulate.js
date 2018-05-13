@@ -31,18 +31,18 @@ describe('Articulate', () => {
 
         it('should trigger a population of its voices member', function () {
             // Arrange
-            this.articulate.populateVoiceList = sinon.spy();
+            this.articulate._populateVoiceList = sinon.spy();
             global.window = {};
 
             // Act
             this.articulate.init();
 
             // Assert
-            expect(this.articulate.populateVoiceList).to.have.been.called;
+            expect(this.articulate._populateVoiceList).to.have.been.called;
         });
     });
 
-    describe('.populateVoiceList()', () => {
+    describe('._populateVoiceList()', () => {
         beforeEach(function () {
             this.articulate = new Articulate();
             this.window = global.window;
@@ -60,12 +60,39 @@ describe('Articulate', () => {
             global.window = { speechSynthesis: { getVoices: getVoicesSpy } };
 
             // Act
-            this.articulate.populateVoiceList();
+            this.articulate._populateVoiceList();
 
             // Assert
             expect(getVoicesSpy).to.have.been.called;
             expect(this.articulate.voices).not.to.be.empty;
             expect(this.articulate.voices[ 0 ]).to.be.an('object');
+        });
+    });
+
+    describe('.speak()', () => {
+        beforeEach(function () {
+            this.articulate = new Articulate();
+            this.window = global.window;
+        });
+
+        afterEach(function () {
+            global.window = this.window;
+        });
+
+        it('should speak out the passed text', function () {
+            // Arrange
+            const speakSpy = sinon.spy();
+            global.window = {
+                speechSynthesis: { speak: speakSpy },
+                SpeechSynthesisUtterance: function () {}
+            };
+            const text = 'Yolo!';
+
+            // Act
+            this.articulate.speak(text);
+
+            // Assert
+            expect(speakSpy).to.have.been.called;
         });
     });
 

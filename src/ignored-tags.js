@@ -1,0 +1,23 @@
+export default [
+    "audio",
+    "button",
+    "canvas",
+    "code",
+    "del",
+    "dialog",
+    "dl",
+    "embed",
+    "form",
+    "head",
+    "iframe",
+    "meter",
+    "nav",
+    "noscript",
+    "object",
+    "s",
+    "script",
+    "select",
+    "style",
+    "textarea",
+    "video"
+];

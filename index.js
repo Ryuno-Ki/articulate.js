@@ -1,4 +1,3 @@
-import config from './src/config';
 import Articulate from './src/articulate';
 
 function voiceTag (prepend, append) {

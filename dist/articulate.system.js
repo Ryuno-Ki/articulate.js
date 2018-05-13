@@ -3,6 +3,12 @@ System.register([], function (exports, module) {
     return {
         execute: function () {
 
+            var VoiceOptions = {
+                rate: 1.10,
+                pitch: 1,
+                volume: 1
+            }
+
             class VoiceObject {
                 constructor(options) {
                     const { name, language } = options;
@@ -14,16 +20,17 @@ System.register([], function (exports, module) {
             class Articulate {
                 constructor() {
                     this.voices = [];
+                    this._voiceOptions = VoiceOptions;
                 }
 
                 init() {
-                    this.populateVoiceList();
+                    this._populateVoiceList();
                     // The system voices are loaded asynchronously in deference to Chrome.
                     // After checking for compatability, define the utterance object and then cancel the speech
                     // immediately even though nothing is yet spoken. This is to fix a quirk in Windows Chrome.
                     if (typeof window.speechSynthesis !== 'undefined'
                         && window.speechSynthesis.onvoiceschanged !== undefined) {
-                        window.speechSynthesis.onvoiceschanged = populateVoiceList;
+                        window.speechSynthesis.onvoiceschanged = this._populateVoiceList;
                     }
 
                     if ("speechSynthesis" in window) {
@@ -35,13 +42,23 @@ System.register([], function (exports, module) {
                 // This populates the "voices" member with objects that represent the
                 // available voices in the current browser.
                 // Each object has two properties: name and language.
-                populateVoiceList () {
+                _populateVoiceList () {
                     const systemVoices = window.speechSynthesis.getVoices();
                     systemVoices.forEach((voice) => {
                         const { name, lang } = voice;
                         const voiceObject = new VoiceObject({ name, lang });
                         this.voices.push(voiceObject);
                     });
+                }
+
+                speak (text) {
+                    const speech = new window.SpeechSynthesisUtterance();
+                    speech.text = text;
+                    speech.rate = this._voiceOptions.rate;
+                    speech.pitch = this._voiceOptions.patch;
+                    speech.volume = this._voiceOptions.volume;
+
+                    window.speechSynthesis.speak(speech);
                 }
 
                 pause () {
