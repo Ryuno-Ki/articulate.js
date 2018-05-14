@@ -1,8 +1,8 @@
 {
     "elements": [
-        "a",
+        { "tag": "a", "prepend": "link", "append": "" },
         "abbr",
-        "b",
+        { "tag": "b", "prepend": "bold", "append": "" },
         "bdi",
         "bdo",
         "br",
@@ -11,7 +11,7 @@
         "data",
         "dfn",
         "em",
-        "i",
+        { "tag": "i", "prepend": "italic", "append": "" },
         "kbd",
         "mark",
         "nobr",
@@ -25,11 +25,11 @@
         "small",
         "span",
         "strong",
-        "sub",
-        "sup",
+        { "tag": "sub", "prepend": "subscript", "append": "" },
+        { "tag": "sup", "prepend": "superscript", "append": "" },
         "time",
         "tt",
-        "u",
+        { "tag": "u", "prepend": "underline", "append": "" },
         "var",
         "wbr"
     ]

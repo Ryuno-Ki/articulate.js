@@ -1,9 +1,9 @@
 {
     "elements": [
         "details",
-        "dialog",
-        "menu",
-        "menuitem",
+        { "tag": "dialog", "prepend": "dialog", "append": "" },
+        { "tag": "menu", "prepend": "menu", "append": "" },
+        { "tag": "menuitem", "prepend": "menu item", "append": "" },
         "summary"
     ]
 }

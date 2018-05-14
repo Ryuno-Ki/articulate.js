@@ -1,7 +1,7 @@
 {
     "elements": [
-        "applet",
-        "embed",
+        { "tag": "applet", "prepend": "application", "append": "" },
+        { "tag": "embed", "prepend": "embedded object object", "append": "" },
         "iframe",
         "noembed",
         "object",

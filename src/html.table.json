@@ -1,14 +1,14 @@
 {
     "elements": [
-        "caption",
-        "col",
+        { "tag": "caption", "prepend": "caption": "append": "" },
+        { "tag": "col", "prepend": "column", "append": "" },
         "colgroup",
-        "table",
-        "tbody",
-        "td",
-        "tfoot",
+        { "tag": "table", "prepend": "table", "append": "" },
+        { "tag": "tbody", "prepend": "table body", "append": "" },
+        { "tag": "td", "prepend": "cell", "append": "" },
+        { "tag": "tfoot", "prepend": "table footer", "append": "" },
         "th",
-        "thead",
-        "tr"
+        { "tag": "thead", "prepend": "table header", "append": "" },
+        { "tag": "tr", "prepend": "row", "append": "" }
     ]
 }

@@ -1,18 +1,18 @@
 {
     "elements": [
-        "button",
+        { "tag": "button", "prepend": "button", "append": "" },
         "datalist",
         "fieldset",
-        "form",
+        { "tag": "form", "prepend": "form", "append": "" },
         "input",
-        "label",
+        { "tag": "label", "prepend": "label", "append": "" },
         "legend",
         "meter",
         "optgroup",
         "option",
         "output",
-        "progress",
-        "select",
+        { "tag": "progress", "prepend": "progress bar", "append": "" },
+        { "tag": "select", "prepend": "drop down button", "append": "" },
         "textarea"
     ]
 }

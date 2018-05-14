@@ -1,6 +1,6 @@
 {
     "elements": [
-        "blockquote",
+        { "tag": "blockquote", "prepend": "block quote", "append": "leaving block quote" },
         "dd",
         "dir",
         "div",
@@ -9,11 +9,11 @@
         "figcaption",
         "figure",
         "hr",
-        "li",
+        { "tag": "li", "prepend": "list item", "append": "" },
         "main",
-        "ol",
-        "p",
+        { "tag": "ol", "prepend": "ordered list", "append": "End of list." },
+        { "tag": "p", "prepend": "paragraph", "append": "" },
         "pre",
-        "ul"
+        { "tag": "ul", "prepend": "unordered list", "append": "End of list." }
     ]
 }

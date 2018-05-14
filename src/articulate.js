@@ -1,3 +1,4 @@
+import UI from './ui';
 import VoiceOptions from './voice-options';
 import VoiceObject from './voice-object';
 
@@ -36,6 +37,16 @@ export default class Articulate {
     }
 
     speak (text) {
+        if (!this.enabled()) {
+            return new UI().abort('Sorry, this browser does not support the Web Speech API');
+        }
+
+        if (this.isSpeaking()) {
+            // If something is currently being spoken, ignore new voice request. Otherwise it would be queued,
+            // which is doable if someone wanted that, but not what I wanted.
+            return;
+        }
+
         const speech = new window.SpeechSynthesisUtterance();
         speech.text = text;
         speech.rate = this._voiceOptions.rate;

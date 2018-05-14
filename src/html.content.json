@@ -3,16 +3,16 @@
         "address",
         "article",
         "aside",
-        "footer",
-        "header",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
+        { "tag": "footer", "prepend": "footer", "append": "" },
+        { "tag": "header", "prepend": "heading. ", "append": "" },
+        { "tag": "h1", "prepend": "heading 1. ", "append": "" },
+        { "tag": "h2", "prepend": "heading 2. ", "append": "" },
+        { "tag": "h3", "prepend": "heading 3. ", "append": "" },
+        { "tag": "h4", "prepend": "heading 4. ", "append": "" },
+        { "tag": "h5", "prepend": "heading 5. ", "append": "" },
+        { "tag": "h5", "prepend": "heading 6. ", "append": "" },
         "hgroup",
         "nav",
-        "section"
+        { "tag": "section", "prepend": "section", "append": "" }
     ]
 }

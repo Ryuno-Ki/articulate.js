@@ -1,6 +1,6 @@
 {
     "elements": [
-        "canvas",
+        { "tag": "canvas", "prepend": "canvas", "append": "" },
         "noscript",
         "script"
     ]
