@@ -3,6 +3,12 @@ System.register([], function (exports, module) {
     return {
         execute: function () {
 
+            class UI {
+                abort (text) {
+                    alert(text);
+                }
+            }
+
             var VoiceOptions = {
                 rate: 1.10,
                 pitch: 1,
@@ -52,6 +58,16 @@ System.register([], function (exports, module) {
                 }
 
                 speak (text) {
+                    if (!this.enabled()) {
+                        return new UI().abort('Sorry, this browser does not support the Web Speech API');
+                    }
+
+                    if (this.isSpeaking()) {
+                        // If something is currently being spoken, ignore new voice request. Otherwise it would be queued,
+                        // which is doable if someone wanted that, but not what I wanted.
+                        return;
+                    }
+
                     const speech = new window.SpeechSynthesisUtterance();
                     speech.text = text;
                     speech.rate = this._voiceOptions.rate;
