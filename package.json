@@ -7,9 +7,13 @@
     "build": "rollup --config",
     "build:test": "rollup --config rollup.config.test.js",
     "coverage": "nyc report",
+    "doc": "jsdoc -d ./docs -p ./package.json -R README.md src",
+    "flow:check": "flow check ./annotated",
+    "flow:jsdoc": "flow-jsdoc -d ./src -o ./annotated -c",
     "posttest": "npm run coverage",
     "pretest": "npm run build:test",
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "typing": "npm run flow:jsdoc && npm run flow:check"
   },
   "repository": {
     "type": "git",

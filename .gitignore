@@ -218,7 +218,9 @@ pip-log.txt
 ## Node.js
 #################
 
+annotated
 node_modules
 coverage
+docs
 test/*
 !test/*.spec.js
