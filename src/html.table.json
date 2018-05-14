@@ -1,6 +1,6 @@
 {
     "elements": [
-        { "tag": "caption", "prepend": "caption": "append": "" },
+        { "tag": "caption", "prepend": "caption", "append": "" },
         { "tag": "col", "prepend": "column", "append": "" },
         "colgroup",
         { "tag": "table", "prepend": "table", "append": "" },
