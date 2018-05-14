@@ -32,6 +32,8 @@
     "chai": "4.1.2",
     "chai-dom": "1.8.0",
     "es6-promisify": "6.0.0",
+    "flow-bin": "0.72.0",
+    "flow-jsdoc": "0.3.1",
     "jsdoc": "3.5.5",
     "jsdom": "11.10.0",
     "mocha": "5.1.1",
