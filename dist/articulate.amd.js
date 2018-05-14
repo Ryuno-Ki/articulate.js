@@ -2,7 +2,7 @@ define(function () { 'use strict';
 
     class UI {
         abort (text) {
-            alert(text);
+            window.alert(text);
         }
     }
 

@@ -5,7 +5,7 @@ System.register([], function (exports, module) {
 
             class UI {
                 abort (text) {
-                    alert(text);
+                    window.alert(text);
                 }
             }
 

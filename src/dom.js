@@ -1,5 +1,9 @@
 import ignoredTags from './ignored-tags';
 
+function toArray(list) {
+    return Array.prototype.slice.call(list);
+}
+
 export default class DOM {
     constructor (selector) {
         this.selector = selector || '[data-articulate]';
@@ -11,7 +15,7 @@ export default class DOM {
 
     getSelection () {
         const elements = window.document.querySelectorAll(this.selector);
-        return Array.prototype.slice.call(elements);
+        return toArray(elements);
     }
 
     processElements (elements) {
@@ -30,40 +34,54 @@ export default class DOM {
         return elements;
     }
 
-    _ignoreElements(elements, ignoreList) {
-        const emptyNode = document.createTextNode("");
-
+    _ignoreElements (elements, ignoreList) {
         let el = elements.map((element) => {
             ignoreList.forEach((tag) => {
-                const hits = Array.prototype.slice.call(element.querySelectorAll(tag));
-                hits.forEach((hit) => {
-                    hit.parentNode.replaceChild(emptyNode.cloneNode(), hit);
-                });
+                toArray(element.querySelectorAll(tag))
+                  .forEach(this._removeElement);
             });
             return element;
         });
 
         return el.map((element) => {
-            const hits = Array.prototype.slice.call(element.querySelectorAll(this._ignore));
-            hits.forEach((hit) => {
-                hit.parentNode.replaceChild(emptyNode.cloneNode(), hit);
-            });
+            toArray(element.querySelectorAll(this._ignore))
+              .forEach(this._removeElement);
             return element;
         });
     }
 
     _prependElements (elements) {
         return elements.map((element) => {
-            const hits = Array.prototype.slice.call(element.querySelectorAll(this._prepend));
-            hits.forEach((hit) => {
-                const text = hit.dataset.articulatePrepend;
-                const node = document.createTextNode(text);
-                hit.parentNode.insertBefore(text, node);
-            });
+            const descendors = toArray(element.querySelectorAll(this._prepend));
+            descendors.forEach(this._prependElement);
+            return element;
         });
     }
 
     _appendElements (elements) {
-        return elements;
+        return elements.map((element) => {
+            const descendors = toArray(element.querySelectorAll(this._append));
+            descendors.forEach(this._appendElement);
+            return element;
+        });
+    }
+
+    _removeElement (element) {
+        const emptyNode = document.createTextNode("");
+        element.parentNode.replaceChild(emptyNode, element);
+    }
+
+    _prependElement (element) {
+        // TODO: Dynamically read dataset based on this._prepend
+        const text = element.dataset.articulatePrepend;
+        const node = document.createTextNode(text);
+        element.parentNode.insertBefore(node, element);
+    }
+
+    _appendElement (element) {
+        // TODO: Dynamically read dataset based on this._append
+        const text = element.dataset.articulateAppend;
+        const node = document.createTextNode(text);
+        element.parentNode.insertBefore(node, element.nextSibling);
     }
 }

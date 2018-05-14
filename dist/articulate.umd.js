@@ -6,7 +6,7 @@
 
     class UI {
         abort (text) {
-            alert(text);
+            window.alert(text);
         }
     }
 

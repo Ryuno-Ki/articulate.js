@@ -3,7 +3,7 @@ var Articulate = (function () {
 
     class UI {
         abort (text) {
-            alert(text);
+            window.alert(text);
         }
     }
 
