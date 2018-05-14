@@ -1,0 +1,12 @@
+{
+    "elements": [
+        "applet",
+        "embed",
+        "iframe",
+        "noembed",
+        "object",
+        "param",
+        "picture",
+        "source"
+    ]
+}

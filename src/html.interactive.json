@@ -1,0 +1,9 @@
+{
+    "elements": [
+        "details",
+        "dialog",
+        "menu",
+        "menuitem",
+        "summary"
+    ]
+}

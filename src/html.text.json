@@ -1,0 +1,19 @@
+{
+    "elements": [
+        "blockquote",
+        "dd",
+        "dir",
+        "div",
+        "dl",
+        "dt",
+        "figcaption",
+        "figure",
+        "hr",
+        "li",
+        "main",
+        "ol",
+        "p",
+        "pre",
+        "ul"
+    ]
+}
