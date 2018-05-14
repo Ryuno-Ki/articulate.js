@@ -11,7 +11,7 @@
   "reporter": [
     "lcov",
     "html",
-    "text-summary"
+    "text"
   ],
   "report-dir": "./coverage",
   "temp-directory": "./tmp"
