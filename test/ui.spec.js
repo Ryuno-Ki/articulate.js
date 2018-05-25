@@ -19,7 +19,7 @@ describe('UI', () => {
         it('alerts the user', () => {
             // Arrange
             const alertSpy = sinon.spy();
-            this.window = { alert: alertSpy };
+            global.window = { alert: alertSpy };
 
             // Act
             const ui = new UI();
