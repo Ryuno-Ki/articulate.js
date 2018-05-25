@@ -40,6 +40,44 @@ describe('Articulate', () => {
             // Assert
             expect(this.articulate._populateVoiceList).to.have.been.called;
         });
+
+        it('should asynchronously populate voice list', function () {
+            // Arrange
+            global.window = {
+                speechSynthesis: {
+                    cancel: function () {},
+                    onvoiceschanged: function () {}
+                },
+                SpeechSynthesisUtterance: function () {}
+            };
+            const populateSpy = sinon.spy();
+            this.articulate._populateVoiceList = populateSpy;
+
+            // Act
+            this.articulate.init();
+
+            // Assert
+            expect(populateSpy).to.have.callCount(1);
+            expect(global.window.speechSynthesis.onvoiceschanged).to.equal(populateSpy);
+        });
+
+        it('should start and cancel an utterance to fix Chrome', function () {
+            // Arrange
+            global.window = { speechSynthesis: {} };
+            const constructorSpy = sinon.spy();
+            global.window.SpeechSynthesisUtterance = constructorSpy;
+
+            const cancelSpy = sinon.spy();
+            global.window.speechSynthesis.cancel = cancelSpy;
+            this.articulate._populateVoiceList = function () {};
+
+            // Act
+            this.articulate.init();
+
+            // Assert
+            expect(constructorSpy).to.have.been.called;
+            expect(cancelSpy).to.have.been.called;
+        });
     });
 
     describe('._populateVoiceList()', () => {
@@ -70,29 +108,80 @@ describe('Articulate', () => {
     });
 
     describe('.speak()', () => {
-        beforeEach(function () {
-            this.articulate = new Articulate();
-            this.window = global.window;
+        describe('when unsupported', () => {
+            beforeEach(function () {
+                this.articulate = new Articulate();
+                this.window = global.window;
+            });
+
+            afterEach(function () {
+                global.window = this.window;
+            });
+
+            it('should show a message to the user', function () {
+                // Arrange
+                const abortSpy = sinon.spy();
+                this.articulate._abort = abortSpy;
+                delete global.window.speechSynthesis;
+
+                // Act
+                this.articulate.speak('');
+
+                // Assert
+                expect(abortSpy).to.have.been.called;
+            });
         });
 
-        afterEach(function () {
-            global.window = this.window;
-        });
+        describe('when supported', () => {
+            describe('when currently speaking', () => {
+                beforeEach(function () {
+                    this.articulate = new Articulate();
+                    this.window = global.window;
+                });
 
-        it('should speak out the passed text', function () {
-            // Arrange
-            const speakSpy = sinon.spy();
-            global.window = {
-                speechSynthesis: { speak: speakSpy },
-                SpeechSynthesisUtterance: function () {}
-            };
-            const text = 'Yolo!';
+                afterEach(function () {
+                    global.window = this.window;
+                });
 
-            // Act
-            this.articulate.speak(text);
+                it('should not try to speak', function () {
+                    // Arrange
+                    this.articulate.enabled = function () { return true; };
+                    this.articulate.isSpeaking = function () { return true; };
 
-            // Assert
-            expect(speakSpy).to.have.been.called;
+                    // Act
+                    const running = this.articulate.speak('');
+
+                    // Assert
+                    expect(running).to.equal(null);
+                });
+            });
+
+            describe('when not speaking', () => {
+                beforeEach(function () {
+                    this.articulate = new Articulate();
+                    this.window = global.window;
+                });
+
+                afterEach(function () {
+                    global.window = this.window;
+                });
+
+                it('should speak out the passed text', function () {
+                    // Arrange
+                    const speakSpy = sinon.spy();
+                    global.window = {
+                        speechSynthesis: { speak: speakSpy },
+                        SpeechSynthesisUtterance: function () {}
+                    };
+                    const text = 'Yolo!';
+
+                    // Act
+                    this.articulate.speak(text);
+
+                    // Assert
+                    expect(speakSpy).to.have.been.called;
+                });
+            });
         });
     });
 

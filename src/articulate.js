@@ -18,7 +18,7 @@ export default class Articulate {
             window.speechSynthesis.onvoiceschanged = this._populateVoiceList;
         }
 
-        if ("speechSynthesis" in window) {
+        if ('speechSynthesis' in window) {
             const speech = new window.SpeechSynthesisUtterance();
             window.speechSynthesis.cancel();
         }
@@ -36,15 +36,19 @@ export default class Articulate {
         });
     }
 
+    _abort () {
+        return new UI().abort('Sorry, this browser does not support the Web Speech API');
+    }
+
     speak (text) {
         if (!this.enabled()) {
-            return new UI().abort('Sorry, this browser does not support the Web Speech API');
+            return this._abort();
         }
 
         if (this.isSpeaking()) {
             // If something is currently being spoken, ignore new voice request. Otherwise it would be queued,
             // which is doable if someone wanted that, but not what I wanted.
-            return;
+            return null;
         }
 
         const speech = new window.SpeechSynthesisUtterance();
