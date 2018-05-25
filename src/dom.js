@@ -19,7 +19,7 @@ export default class DOM {
     }
 
     processElements (elements) {
-        const ignoreTagList = _whitelistTags([...ignoredTags]);
+        const ignoreTagList = this._whitelistTags([...ignoredTags]);
         let processed = this._ignoreElements(elements, ignoreTagList);
         processed = this._prependElements(elements);
         processed = this._appendElements(elements);
@@ -27,6 +27,7 @@ export default class DOM {
     }
 
     textify () {
+        return '';
     }
 
     _whitelistTags (elements, ignoreList) {

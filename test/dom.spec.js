@@ -1,7 +1,10 @@
 const chai = require('chai');
 const chaiDom = require('chai-dom');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 const { JSDOM } = require('jsdom');
 const expect = chai.expect;
+chai.use(sinonChai);
 // chai.use(chaiDom);
 
 const DOM = require('./dom');
@@ -106,6 +109,96 @@ describe('DOM', () => {
 
             // FIXME: Report to author of chai-dom, that this throws:
             //expect(element).to.have.trimmed.text(text);
+        });
+    });
+
+    describe('_prependElements', () => {
+        it('should prepend for every element of the list', () => {
+            // Arrange
+            const dom = new DOM();
+            dom._prependElement = sinon.spy();
+            const mockContent = [1, 2, 3, 4, 5].map(() => {
+                return '<div data-articulate-prepend=""></div>';
+            });
+            const number = mockContent.length;
+            document.body.innerHTML = ['<div data-articulate>']
+            .concat(mockContent)
+            .concat('</div>')
+            .join('');
+
+            // Act
+            const elements = dom.getSelection();
+            dom._prependElements(elements);
+
+            // Assert
+            expect(dom._prependElement).to.have.callCount(number);
+        });
+    });
+
+    describe('_appendElements', () => {
+        it('should append for every element of the list', () => {
+            // Arrange
+            const dom = new DOM();
+            dom._appendElement = sinon.spy();
+            const mockContent = [1, 2, 3, 4, 5].map(() => {
+                return '<div data-articulate-append=""></div>';
+            });
+            const number = mockContent.length;
+            document.body.innerHTML = ['<div data-articulate>']
+            .concat(mockContent)
+            .concat('</div>')
+            .join('');
+
+            // Act
+            const elements = dom.getSelection();
+            dom._appendElements(elements);
+
+            // Assert
+            expect(dom._appendElement).to.have.callCount(number);
+        });
+    });
+
+    describe('processElements', () => {
+        it('should prepend elements', () => {
+            // Arrange
+            const dom = new DOM();
+            dom._prependElements = sinon.spy();
+            document.body.innerHTML = '<div data-articulate></div>'
+
+            // Act
+            const elements = dom.getSelection();
+            dom.processElements(elements);
+
+            // Assert
+            expect(dom._prependElements).to.have.been.called;
+        });
+
+        it('should append elements', () => {
+            // Arrange
+            const dom = new DOM();
+            dom._appendElements = sinon.spy();
+            document.body.innerHTML = '<div data-articulate></div>'
+
+            // Act
+            const elements = dom.getSelection();
+            dom.processElements(elements);
+
+            // Assert
+            expect(dom._appendElements).to.have.been.called;
+        });
+    });
+
+    describe('textify', () => {
+        it('should return the text to be spoken', () => {
+            // Arrange
+
+            // Act
+            const dom = new DOM();
+            const elements = dom.getSelection();
+            const text = dom.textify(elements);
+
+            // Assert
+            expect(text).to.be.a('string');
         });
     });
 });
