@@ -1,4 +1,7 @@
 [ignore]
+.*\.json
+.*/src/.*
+.*/test/.*
 
 [include]
 
