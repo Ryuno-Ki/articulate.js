@@ -1,8 +1,11 @@
 /* @flow */
 
 /**
+ * @module Articulate/voice-option
+ */
+
+/**
  * Holding default config for TTS
- * @name VoiceOptions
  * @property { number } rate - How fast to speak
  * @property { number } pitch - How high to speak
  * @property { number } volume - How loud to speak

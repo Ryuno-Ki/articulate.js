@@ -1,13 +1,15 @@
 /* @flow */
 
 /**
+ * @module Articulate/UI
+ */
+
+/**
  * Class representing interacting with a UI.
- * @class UI
  */
 export default class UI {
     /**
      * Aborts the execution and informs the user.
-     * @method UI#abort
      * @access public
      *
      * @param { string } text - Text to display
