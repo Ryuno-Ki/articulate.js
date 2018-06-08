@@ -150,6 +150,11 @@ export default class Articulate {
         return window.speechSynthesis.speaking;
     }
 
+    /**
+     * Checks, whether browser is currently pausing
+     * @public
+     * @returns { boolean }
+     */
     isPaused () {
         // TODO: Turn into a getter
         return window.speechSynthesis.paused;
