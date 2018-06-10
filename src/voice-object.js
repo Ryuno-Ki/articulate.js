@@ -5,7 +5,9 @@
  */
 
 /**
- * Class representing an object to speak.
+ * Class representing a voice
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice|SpeechSynthesisVoice on MDN}
+ * @todo Think about making this a POJO and document its interface.
  */
 export default class VoiceObject {
     /**
